@@ -30,7 +30,7 @@ et le traquepad qui ajoute une delicatesse au tout avec sa jolie gamme pentatoni
 2. Installer [Termux](https://play.google.com/store/apps/details?id=com.termux) sur l'appareil
 3. Lancer Termux et installer node, git et yarn
   ```
-  pkg install node git yarn
+  pkg install nodejs git yarn
   ```
 4. Cloner le repo
   ```
