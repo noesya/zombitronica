@@ -1,9 +1,20 @@
 const { networkInterfaces, hostname } = require('os');
+
 const port = 3000;
-const express = require('express')
-const app = express()
-const http = require('http');
-const server = http.createServer(app);
+
+const https = require('https');
+const fs = require('fs');
+
+const options = {
+  key: fs.readFileSync('selfsigned.key'),
+  cert: fs.readFileSync('selfsigned.crt')
+};
+
+const express = require('express');
+var app = express();
+
+const server = https.createServer(options, app);
+
 const { Server } = require("socket.io");
 const io = new Server(server);
 
@@ -43,6 +54,10 @@ app.get('/controller', function (req, res) {
   res.sendFile(__dirname + '/views/controller.html');
 });
 
+app.get('/motion', function (req, res) {
+  res.sendFile(__dirname + '/views/motion.html');
+});
+
 io.on('connection', (socket) => {
   socket.on('sequencer', (data) => {
     io.emit('sequencer', data);
@@ -65,11 +80,14 @@ io.on('connection', (socket) => {
   socket.on('position', (data) => {
     io.emit('position', data);
   });
+  socket.on('dial-motion', (beta) => {
+    io.emit('dial-motion', beta);
+  });
 });
 
 server.listen(port, () => {
   console.log(`listening on:`);
   hostnames.forEach(hostname => {
-    console.log(`- http://${hostname}:${port}`);
+    console.log(`- https://${hostname}:${port}`);
   })
 });

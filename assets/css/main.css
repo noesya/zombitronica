@@ -1,3 +1,4 @@
+
 body {
   background: black;
   position: fixed;
@@ -48,4 +49,9 @@ a {
 
 .zombitronica__index.started #stop {
   display: block;
+  z-index: -1;
+}
+
+#quaternions {
+position: absolute
 }

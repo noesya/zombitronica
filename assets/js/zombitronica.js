@@ -249,6 +249,10 @@ let zombitronica = {
         this.socket.on('controller1', (data) => {
             Tone.Transport.bpm.rampTo(data, 2);
         });
+        this.socket.on('dial-motion', (betaRatio) => {
+            var bpm = betaRatio * (zombitronica.bpm.max - zombitronica.bpm.min) + zombitronica.bpm.min
+            Tone.Transport.bpm.rampTo(bpm, 2);
+        });
         
         this.socket.on('controller2', (data) => {
             this.distortion.instance.distortion = data;
