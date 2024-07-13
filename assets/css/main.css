@@ -1,48 +1,57 @@
-@font-face {
-    font-family: 'BricolageGrotesque';
-    src: url('/assets/fonts/BricolageGrotesque.ttf');
-}
+
 body {
-    background: black;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    color: white;
-    font: 1em sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    overflow: hidden;
+  background: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: white;
+  font: 1em sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-.zombitronica__controller #content {
+a {
+  color: white;
+  text-decoration: none;
 }
 
-.zombitronica__controller #content1 {
-    
+.zombitronica__index {
+  text-align: center;
 }
 
-.zombitronica__controller #content2 {
-    
+.zombitronica__index a {
+  background: #f25138;
+  border-radius: 5px;
+  padding: 20px 30px;
+  display: inline-block;
+  margin: 10px
 }
 
-
-
-/* ZOMBITRONPOLIS */
-body.zombitronpolis {
-    background: white;
-    color: black;
-    font: 1em 'BricolageGrotesque';
-    align-items: center;
-    justify-content: center;
-
+.zombitronica__index #start, 
+.zombitronica__index #stop {
+  display: block;
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-body.zombitronpolis #start {
-    padding: 10px;
-    font-size: 50px;
-    font-variation-settings: "wdth" 75, "wght" 200, "opsz" 12;
-    transform: skewX(0);
+.zombitronica__index #stop {
+  display: none;
+}
+
+.zombitronica__index.started #start {
+  display: none;
+}
+
+.zombitronica__index.started #stop {
+  display: block;
+  z-index: -1;
+}
+
+#quaternions {
+position: absolute
 }

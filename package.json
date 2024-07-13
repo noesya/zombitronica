@@ -6,10 +6,10 @@
   "dependencies": {
     "express": "^4.19.2",
     "nexusui": "^2.1.6",
-    "socket.io": "^4.7.5"
+    "socket.io": "^4.7.5",
+    "tone": "^15.0.4"
   },
   "scripts": {
-    "zombitronica1": "node zombitronica_1.js",
-    "zombitronpolis": "node zombitronpolis.js"
+    "start": "node index.js"
   }
 }
