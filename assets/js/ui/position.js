@@ -1,4 +1,3 @@
-
 let position = new Nexus.Position('#content', {
     'size': [300, 300],
     'mode': 'absolute',  // "absolute" or "relative"
@@ -12,13 +11,11 @@ let position = new Nexus.Position('#content', {
     'stepY': 0
 }
 );
+position.colorize("accent","#f25138");
+position.colorize("fill","#666")
 
 const socket = io();
 
-position.on('change', function (v) {
-    socket.emit('position', v)
+position.on('change', function (data) {
+    socket.emit('position', data)
 })
-
-window.addEventListener("devicemotion", (event) => {
-    console.log(event);
-});
