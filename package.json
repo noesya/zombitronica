@@ -10,6 +10,7 @@
     "tone": "^15.0.4"
   },
   "scripts": {
-    "zombitronica": "node zombitronica_1.js"
+    "zombitronica": "node zombitronica_1.js",
+    "start": "node zombitronica_1.js"
   }
 }

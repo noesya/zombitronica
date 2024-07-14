@@ -51,15 +51,15 @@ let zombitronica = {
         if (!this.initialized) {
             this.initialize();
         }
-        Tone.getTransport().start();
-        // document.body.classList.add("started");
+        Tone.Transport.start();
+        document.body.classList.add("started");
         this.playing = true;
         console.log("Zombitronica start");
     },
 
     stop: function () {
-        Tone.getTransport().stop();
-        // document.body.classList.remove("started");
+        Tone.Transport.stop();
+        document.body.classList.remove("started");
         this.playing = false;
         console.log("Zombitronica stop");
     },
@@ -80,8 +80,10 @@ let zombitronica = {
     },
 
     initializeTone: function () {
-        Tone.getTransport().start();
-        Tone.getTransport().bpm.value = this.bpm.default;
+        Tone.Transport.start();
+        Tone.Transport.bpm.value = this.bpm.default;
+        Tone.context.resume();
+        Tone.context.latencyHint = "interactive";
     },
 
     initializeFilters: function () {
@@ -103,19 +105,19 @@ let zombitronica = {
         this.sequencer.step = 0;
         this.sequencer.synths = [
             {
-                'synth': new Tone.MembraneSynth(instruments.membraneSynth1).chain(this.distortion.instance, this.reverb.instance), // kick
+                'synth': new Tone.MembraneSynth(instruments.membraneSynth1).toDestination(), // kick
                 'note': 'C2'
             },
             {
-                'synth': new Tone.MetalSynth(instruments.metalSynth1).chain(this.distortion.instance, this.reverb.instance),
+                'synth': new Tone.MetalSynth(instruments.metalSynth1).toDestination(),
                 'note': 'C2'
             },
             {
-                'synth': new Tone.FMSynth(instruments.FMSynth2).chain(this.distortion.instance, this.reverb.instance),
+                'synth': new Tone.FMSynth(instruments.FMSynth2).toDestination(),
                 'note': 'F2'
             },
             {
-                'synth': new Tone.MetalSynth(instruments.metalSynth2).chain(this.distortion.instance, this.reverb.instance),
+                'synth': new Tone.MetalSynth(instruments.metalSynth2).toDestination(),
                 'note': 'C2'
             }
         ];
@@ -130,10 +132,10 @@ let zombitronica = {
 
             // La fonction qui joue les sons selon l'état de la matrice
             this.sequencer.playSounds = function (time) {
-                for (let i = 0; i < this.matrix.length; i++) {
+                for (let i = 0; i < this.synths.length; i++) {
                     const active = this.matrix[i][this.step] == 1;
                     if (active) {
-                        this.synths[i].synth.triggerAttackRelease(this.synths[i].note, "2hz", time);
+                        this.synths[i].synth.triggerAttack(this.synths[i].note, time, 0.5);
                     }
                 }
             };
@@ -144,7 +146,7 @@ let zombitronica = {
         this.socket = io();
 
         this.socket.on('sequencer', (data) => {
-            let value = data.state ? 1 : 0;
+            const value = data.state ? 1 : 0;
             this.sequencer.matrix[data.row][data.column] = value;
         });
 
