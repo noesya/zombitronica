@@ -103,22 +103,23 @@ let zombitronica = {
     initializeSequencer: function () {
         // Step va de 0 à 7 et indique l'étape de la matrice en cours (la verticale)
         this.sequencer.step = 0;
-        this.sequencer.synths = [
+        this.sequencer.instruments = [
             {
-                'synth': new Tone.MembraneSynth(instruments.membraneSynth1).toDestination(), // kick
-                'note': 'C2'
+                'synth': new Tone.Player("../assets/sounds/kick1.wav").toDestination(), // kick
+                'start' : function (time) { this.synth.start(time) }
             },
             {
-                'synth': new Tone.MetalSynth(instruments.metalSynth1).toDestination(),
-                'note': 'C2'
+                'synth': new Tone.Player("../assets/sounds/bell3.wav").toDestination(), 
+                'start' : function (time) { this.synth.start(time) }
             },
             {
                 'synth': new Tone.FMSynth(instruments.FMSynth2).toDestination(),
-                'note': 'F2'
+                'note': 'F2',
+                'start' : function (time) { this.synth.triggerAttack(this.note, time, 0.5) }
             },
             {
-                'synth': new Tone.MetalSynth(instruments.metalSynth2).toDestination(),
-                'note': 'C2'
+                'synth': new Tone.Player("../assets/sounds/hihat.wav").toDestination(), 
+                'start' : function (time) { this.synth.start(time) }
             }
         ];
 
@@ -132,10 +133,10 @@ let zombitronica = {
 
             // La fonction qui joue les sons selon l'état de la matrice
             this.sequencer.playSounds = function (time) {
-                for (let i = 0; i < this.synths.length; i++) {
+                for (let i = 0; i < this.instruments.length; i++) {
                     const active = this.matrix[i][this.step] == 1;
                     if (active) {
-                        this.synths[i].synth.triggerAttack(this.synths[i].note, time, 0.5);
+                        this.instruments[i].start(time);
                     }
                 }
             };
