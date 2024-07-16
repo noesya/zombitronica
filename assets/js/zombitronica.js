@@ -17,20 +17,20 @@ let zombitronica = {
         default: 0
     },
     reverb: {
-        wet: { // 
+        wet: { 
             min: 0,
             max: 1,
-            default: 0
+            default: 1
         },
         decay: {
             min: 0,
-            max: 1,
-            default: 1.5
+            max: 3,
+            default: 3
         },
         preDelay: { // ms
             min: 0,
             max: 1,
-            default: 0.001
+            default: 1
         }
     },
     lowpass: {
@@ -51,14 +51,14 @@ let zombitronica = {
         if (!this.initialized) {
             this.initialize();
         }
-        Tone.Transport.start();
+        Tone.getTransport().start();
         document.body.classList.add("started");
         this.playing = true;
         console.log("Zombitronica start");
     },
 
     stop: function () {
-        Tone.Transport.stop();
+        Tone.getTransport().stop();
         document.body.classList.remove("started");
         this.playing = false;
         console.log("Zombitronica stop");
@@ -80,8 +80,8 @@ let zombitronica = {
     },
 
     initializeTone: function () {
-        Tone.Transport.start();
-        Tone.Transport.bpm.value = this.bpm.default;
+        Tone.getTransport().start();
+        Tone.getTransport().bpm.value = this.bpm.default;
         Tone.context.resume();
         Tone.context.latencyHint = "interactive";
     },
@@ -92,7 +92,7 @@ let zombitronica = {
         this.reverb.instance = new Tone.Reverb({
             "wet": this.reverb.wet.default,
             "decay": this.reverb.decay.default,
-            "preDelay": this.reverb.preDelay.default}).chain(this.lowpass.instance);
+            "preDelay": this.reverb.preDelay.default}).toDestination();
         this.distortion.instance = new Tone.Distortion(this.distortion.default).toDestination();
     },
 
@@ -164,7 +164,7 @@ let zombitronica = {
         this.socket.on('dial1', (data) => { // all data incomming must be clamped between 0 and 1
             // interpolate 0- min bpm 1 max p
             const bpmValue = data * (this.bpm.max - this.bpm.min) + this.bpm.min;
-            Tone.Transport.bpm.rampTo(bpmValue, 2);
+            Tone.getTransport().bpm.rampTo(bpmValue, 2);
         });
         
         this.socket.on('dial2', (data) => {
@@ -172,7 +172,9 @@ let zombitronica = {
         });
 
         this.socket.on('dial3', (data) => {
-            this.highpass.instance.frequency.rampTo(data, 0.5);
+            const reverbValue = data * (this.reverb.wet.max - this.reverb.wet.min) + this.reverb.wet.min;
+            this.reverb.instance.wet = reverbValue;
+            
         });
 
         this.socket.on('slider', (data) => {
@@ -181,11 +183,13 @@ let zombitronica = {
     }
 }
 
-document.querySelector("#start")?.addEventListener("click", async () => {
-    await Tone.start();
-    zombitronica.start();
-})
-
-document.querySelector("#stop")?.addEventListener("click", ()  => {
-    zombitronica.stop();
+document.querySelector("#start")?.addEventListener("click", async (e) => {
+    if(zombitronica.playing){
+        zombitronica.stop();
+        e.target.innerHTML = "start"
+    }else{
+        await Tone.start();
+        zombitronica.start();
+         e.target.innerHTML = "stop"
+    }
 })
