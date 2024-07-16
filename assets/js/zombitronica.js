@@ -107,21 +107,26 @@ let zombitronica = {
         this.sequencer.step = 0;
         this.sequencer.instruments = [
             {
-                'synth': new Tone.Player("../assets/sounds/kick1.wav").chain(this.gain.instance), // kick
-                'start': function (time) { this.synth.start(time) }
+                instrument: new Tone.Player("../assets/sounds/kick1.wav").chain(this.gain.instance), // kick
+                type: 'player',
+                start: function (time) { this.instrument.start(time) },
+
             },
             {
-                'synth': new Tone.Player("../assets/sounds/bell3.wav").chain(this.gain.instance),
-                'start': function (time) { this.synth.start(time) }
+                instrument: new Tone.Player("../assets/sounds/bell3.wav").chain(this.gain.instance),
+                type: 'player',
+                start: function (time) { this.instrument.start(time) }
             },
             {
-                'synth': new Tone.FMSynth(instruments.FMSynth2).chain(this.gain.instance),
+                instrument: new Tone.FMSynth(instruments.FMSynth2).chain(this.gain.instance),
+                type: 'synth',
                 'note': 'F2',
-                'start': function (time) { this.synth.triggerAttack(this.note, time, 0.5) }
+                start: function (time) { this.instrument.triggerAttack(this.note, time, 0.5) }
             },
             {
-                'synth': new Tone.Player("../assets/sounds/hihat.wav").chain(this.gain.instance),
-                'start': function (time) { this.synth.start(time) }
+                instrument: new Tone.Player("../assets/sounds/hihat.wav").chain(this.gain.instance),
+                type: 'player',
+                start: function (time) { this.instrument.start(time) }
             }
         ];
 
