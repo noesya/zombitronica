@@ -162,7 +162,10 @@ let zombitronica = {
         });
 
         this.socket.on('dial1', (data) => { // all data incomming must be clamped between 0 and 1
-            Tone.Transport.bpm.rampTo(data, 2);
+            // interpolate 0- min bpm 1 max p
+            const bpmValue = data * (this.bpm.max - this.bpm.min) + this.bpm.min;
+            console.log(bpmValue)
+            Tone.Transport.bpm.rampTo(bpmValue, 2);
         });
         
         this.socket.on('dial2', (data) => {
@@ -171,6 +174,10 @@ let zombitronica = {
 
         this.socket.on('dial3', (data) => {
             this.highpass.instance.frequency.rampTo(data, 0.5);
+        });
+
+        this.socket.on('slider', (data) => {
+            console.log(data)
         });
     }
 }
