@@ -105,20 +105,20 @@ let zombitronica = {
         this.sequencer.step = 0;
         this.sequencer.instruments = [
             {
-                'synth': new Tone.Player("../assets/sounds/kick1.wav").toDestination(), // kick
+                'synth': new Tone.Player("../assets/sounds/kick1.wav").chain(this.distortion.instance), // kick
                 'start' : function (time) { this.synth.start(time) }
             },
             {
-                'synth': new Tone.Player("../assets/sounds/bell3.wav").toDestination(), 
+                'synth': new Tone.Player("../assets/sounds/bell3.wav").chain(this.distortion.instance), 
                 'start' : function (time) { this.synth.start(time) }
             },
             {
-                'synth': new Tone.FMSynth(instruments.FMSynth2).toDestination(),
+                'synth': new Tone.FMSynth(instruments.FMSynth2).chain(this.distortion.instance),
                 'note': 'F2',
                 'start' : function (time) { this.synth.triggerAttack(this.note, time, 0.5) }
             },
             {
-                'synth': new Tone.Player("../assets/sounds/hihat.wav").toDestination(), 
+                'synth': new Tone.Player("../assets/sounds/hihat.wav").chain(this.distortion.instance), 
                 'start' : function (time) { this.synth.start(time) }
             }
         ];
@@ -164,12 +164,11 @@ let zombitronica = {
         this.socket.on('dial1', (data) => { // all data incomming must be clamped between 0 and 1
             // interpolate 0- min bpm 1 max p
             const bpmValue = data * (this.bpm.max - this.bpm.min) + this.bpm.min;
-            console.log(bpmValue)
             Tone.Transport.bpm.rampTo(bpmValue, 2);
         });
         
         this.socket.on('dial2', (data) => {
-            this.distortion.instance.distortion = data;
+            this.distortion.instance.distortion = data * (this.distortion.max - this.distortion.min) + this.distortion.min;
         });
 
         this.socket.on('dial3', (data) => {
