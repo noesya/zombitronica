@@ -4,15 +4,17 @@ const colors = {
 }
 
 document.addEventListener("click", (event) => {
+    event.preventDefault();
     document.querySelector('body').requestFullscreen();
     document.addEventListener("dblclick", (ev) => {
+        ev.preventDefault();
         window.location.reload();
         document.querySelector('body').requestFullscreen();
     });
 }, {once: true});
 
 let dial1 = new Nexus.Dial('#content', {
-    'size': [200, 200],
+    'size': [150, 150],
     'interaction': 'radial', // "radial", "vertical", or "horizontal"
     'mode': 'relative', // "absolute" or "relative"
     'min': 0,
@@ -22,8 +24,15 @@ let dial1 = new Nexus.Dial('#content', {
 });
 dial1.colorize("accent", colors.accent);
 dial1.colorize("fill", colors.fill);
+
+dial1.element.addEventListener("dblclick", (ev) => {
+    ev.preventDefault();
+    window.location.reload();
+    document.querySelector('body').requestFullscreen();
+});
+
 let dial2 = new Nexus.Dial('#content2', {
-    'size': [200, 200],
+    'size': [150, 150],
     'interaction': 'radial', // "radial", "vertical", or "horizontal"
     'mode': 'relative', // "absolute" or "relative"
     'min': 0,
@@ -34,7 +43,7 @@ let dial2 = new Nexus.Dial('#content2', {
 dial2.colorize("accent", colors.accent);
 dial2.colorize("fill", colors.fill);
 let dial3 = new Nexus.Dial('#content3', {
-    'size': [200, 200],
+    'size': [150, 150],
     'interaction': 'radial', // "radial", "vertical", or "horizontal"
     'mode': 'relative', // "absolute" or "relative"
     'min': 0,

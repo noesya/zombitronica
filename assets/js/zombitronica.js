@@ -89,12 +89,12 @@ let zombitronica = {
     },
 
     initializeFilters: function () {
-        this.lowpass.instance = new Tone.Filter(this.lowpass.default, "lowpass").toDestination();
+        // this.lowpass.instance = new Tone.Filter(this.lowpass.default, "lowpass").toDestination();s
         this.reverb.instance = new Tone.Reverb({
             wet: this.reverb.wet.default,
             decay: this.reverb.decay.default,
             preDelay: this.reverb.preDelay.default
-        }).chain(this.lowpass.instance);
+        }).toDestination();
 
         this.distortion.instance = new Tone.Distortion(this.distortion.default).chain(this.reverb.instance)
         this.gain.instance = new Tone.Gain(this.gain.default).toDestination();

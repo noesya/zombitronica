@@ -17,18 +17,17 @@ body {
     overflow: hidden;
 }
 
-.zombitronica__controller #content {
-}
-
-.zombitronica__controller #content1 {
-    
-}
-
-.zombitronica__controller #content2 {
-    
+.zombitronica__controller{
+    justify-content: left;
+    align-items: flex-start;
+    padding-top: 80px;
+    padding-left: 0px;
 }
 
 
+.zombitronica__controller div{
+    margin: 0 20px;
+}
 
 /* ZOMBITRONPOLIS */
 body.zombitronpolis {
