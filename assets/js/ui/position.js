@@ -2,6 +2,16 @@ const colors = {
     accent: "#f25138",
     fill: "#000"
 }
+
+document.addEventListener("click", (event) => {
+    document.querySelector('body').requestFullscreen();
+    document.addEventListener("dblclick", (ev) => {
+        window.location.reload();
+        document.querySelector('body').requestFullscreen();
+    });
+}, {once: true});
+
+
 let position = new Nexus.Position('#content', {
     'size': [300, 300],
     'mode': 'absolute',  // "absolute" or "relative"

@@ -3,6 +3,14 @@ const colors = {
     fill: "#000"
 }
 
+document.addEventListener("click", (event) => {
+    document.querySelector('body').requestFullscreen();
+    document.addEventListener("dblclick", (ev) => {
+        window.location.reload();
+        document.querySelector('body').requestFullscreen();
+    });
+}, {once: true});
+
 let dial1 = new Nexus.Dial('#content', {
     'size': [200, 200],
     'interaction': 'radial', // "radial", "vertical", or "horizontal"

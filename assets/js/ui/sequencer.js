@@ -4,9 +4,15 @@ const colors = {
 }
 const bars = 8;
 const socket = io();
-try {
-    document.requestFullscreen();
-} catch (e) { }
+
+document.addEventListener("click", (event) => {
+    document.querySelector('body').requestFullscreen();
+    document.addEventListener("dblclick", (ev) => {
+        window.location.reload();
+        document.querySelector('body').requestFullscreen();
+    });
+}, {once: true});
+
 let sequencer = new Nexus.Sequencer('#sequencer', {
     'size': [600, 300],
     'mode': 'toggle',

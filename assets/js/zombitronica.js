@@ -194,7 +194,16 @@ let zombitronica = {
     }
 }
 
+document.addEventListener("click", (event) => {
+    document.querySelector('body').requestFullscreen();
+    document.addEventListener("dblclick", (ev) => {
+        window.location.reload();
+        document.querySelector('body').requestFullscreen();
+    });
+}, {once: true});
+
 document.querySelector("#start")?.addEventListener("click", async (e) => {
+    e.preventDefault()
     if (zombitronica.playing) {
         zombitronica.stop();
         e.target.innerHTML = "start"
@@ -203,4 +212,4 @@ document.querySelector("#start")?.addEventListener("click", async (e) => {
         zombitronica.start();
         e.target.innerHTML = "stop"
     }
-})
+});

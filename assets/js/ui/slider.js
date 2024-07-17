@@ -2,9 +2,13 @@ const colors = {
     accent: "#f25138",
     fill: "#000"
 }
-try {
-    document.requestFullscreen();
-} catch (e) { }
+document.addEventListener("click", (event) => {
+    document.querySelector('body').requestFullscreen();
+    document.addEventListener("dblclick", (ev) => {
+        window.location.reload();
+        document.querySelector('body').requestFullscreen();
+    });
+}, {once: true});
 var multislider = new Nexus.Multislider('#content', {
     'size': [600, 300],
     'numberOfSliders': 4,
