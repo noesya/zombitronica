@@ -1,3 +1,7 @@
+const colors = {
+    accent: "#f25138",
+    fill: "#666"
+}
 const bars = 8;
 const socket = io();
 try {
@@ -8,9 +12,11 @@ let sequencer = new Nexus.Sequencer('#sequencer', {
     'mode': 'toggle',
     'rows': 4,
     'columns': bars,
-    'paddingRow': 10,
-    'paddingColumn': 20
+    'paddingRow': 0,
+    'paddingColumn': 0
 });
+sequencer.colorize("accent", colors.accent);
+sequencer.colorize("fill", colors.fill);
 
 sequencer.matrix.set.all([
     [1, 0, 1, 0, 1, 0, 1, 0],

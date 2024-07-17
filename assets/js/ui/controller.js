@@ -1,45 +1,55 @@
-    let dial1 = new Nexus.Dial('#content', {
-        'size': [200, 200],
-        'interaction': 'radial', // "radial", "vertical", or "horizontal"
-        'mode': 'relative', // "absolute" or "relative"
-        'min': 0,
-        'max': 1,
-        'step': 0,
-        'value': 0
-    });
+const colors = {
+    accent: "#f25138",
+    fill: "#000"
+}
 
-    let dial2 = new Nexus.Dial('#content2', {
-        'size': [200, 200],
-        'interaction': 'radial', // "radial", "vertical", or "horizontal"
-        'mode': 'relative', // "absolute" or "relative"
-        'min': 0,
-        'max': 1,
-        'step': 0,
-        'value': 0
-    });
-    let dial3 = new Nexus.Dial('#content3', {
-        'size': [200, 200],
-        'interaction': 'radial', // "radial", "vertical", or "horizontal"
-        'mode': 'relative', // "absolute" or "relative"
-        'min': 0,
-        'max': 1,
-        'step': 0,
-        'value': 0
-    });
-    const socket = io();
+let dial1 = new Nexus.Dial('#content', {
+    'size': [200, 200],
+    'interaction': 'radial', // "radial", "vertical", or "horizontal"
+    'mode': 'relative', // "absolute" or "relative"
+    'min': 0,
+    'max': 1,
+    'step': 0,
+    'value': 0
+});
+dial1.colorize("accent", colors.accent);
+dial1.colorize("fill", colors.fill);
+let dial2 = new Nexus.Dial('#content2', {
+    'size': [200, 200],
+    'interaction': 'radial', // "radial", "vertical", or "horizontal"
+    'mode': 'relative', // "absolute" or "relative"
+    'min': 0,
+    'max': 1,
+    'step': 0,
+    'value': 0
+});
+dial2.colorize("accent", colors.accent);
+dial2.colorize("fill", colors.fill);
+let dial3 = new Nexus.Dial('#content3', {
+    'size': [200, 200],
+    'interaction': 'radial', // "radial", "vertical", or "horizontal"
+    'mode': 'relative', // "absolute" or "relative"
+    'min': 0,
+    'max': 1,
+    'step': 0,
+    'value': 0
+});
+dial3.colorize("accent", colors.accent);
+dial3.colorize("fill", colors.fill);
 
-    dial1.on('change', function (v) {
-        socket.emit('dial1', v)
-    })
+const socket = io();
+dial1.on('change', function (v) {
+    socket.emit('dial1', v)
+})
 
-    dial2.on('change', function (v) {
-        socket.emit('dial2', v)
-    })
+dial2.on('change', function (v) {
+    socket.emit('dial2', v)
+})
 
-    dial3.on('change', function (v) {
-        socket.emit('dial3', v)
-    })
+dial3.on('change', function (v) {
+    socket.emit('dial3', v)
+})
 
-    window.addEventListener("devicemotion", (event) => {
-        console.log(event);
-    });
+window.addEventListener("devicemotion", (event) => {
+    console.log(event);
+});

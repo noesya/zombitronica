@@ -1,4 +1,7 @@
-
+const colors = {
+    accent: "#f25138",
+    fill: "#000"
+}
 let position = new Nexus.Position('#content', {
     'size': [300, 300],
     'mode': 'absolute',  // "absolute" or "relative"
@@ -12,7 +15,8 @@ let position = new Nexus.Position('#content', {
     'stepY': 0
 }
 );
-
+position.colorize("accent", colors.accent);
+position.colorize("fill", colors.fill);
 const socket = io();
 
 position.on('change', function (v) {

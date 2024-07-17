@@ -1,3 +1,7 @@
+const colors = {
+    accent: "#f25138",
+    fill: "#000"
+}
 try {
     document.requestFullscreen();
 } catch (e) { }
@@ -12,7 +16,8 @@ var multislider = new Nexus.Multislider('#content', {
     'smoothing': 0,
     'mode': 'bar'  // 'bar' or 'line'
 })
-
+multislider.colorize("accent", colors.accent);
+multislider.colorize("fill", colors.fill);
 const socket = io();
 
 multislider.on('change', function (v) {
