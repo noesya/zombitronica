@@ -9,7 +9,7 @@ let zombitronica = {
     gain: {
         min: 0,
         max: 1,
-        default: 1
+        default: 0
     },
     distortion: {
         min: 0,
@@ -25,7 +25,7 @@ let zombitronica = {
         decay: {
             min: 0.01,
             max: 3,
-            default:2
+            default: 2
         },
         preDelay: { // ms
             min: 0,
@@ -38,6 +38,11 @@ let zombitronica = {
         max: 20000,
         default: 20000
     },
+    volume: {
+        min: -60,
+        max: 10,
+        default: 0
+    },
     sequencer: {
         matrix: [
             [1, 0, 1, 0, 1, 0, 1, 0],
@@ -46,7 +51,9 @@ let zombitronica = {
             [0, 1, 0, 1, 1, 0, 1, 0]
         ]
     },
-
+    position: {
+        started: false
+    },
     start: function () {
         if (!this.initialized) {
             this.initialize();
@@ -67,15 +74,10 @@ let zombitronica = {
     initialize: function () {
         console.log("Zombitronica initializing");
         this.initializeTone();
-        console.log("Tone initialized");
         this.initializeFilters();
-        console.log("Filters initialized");
         this.initializePosition();
-        console.log("Position initialized");
         this.initializeSequencer();
-        console.log("Sequencer initialized");
         this.initializeSocket();
-        console.log("Socket initialized");
         this.initialized = true;
     },
 
@@ -93,41 +95,42 @@ let zombitronica = {
             decay: this.reverb.decay.default,
             preDelay: this.reverb.preDelay.default
         }).chain(this.lowpass.instance);
-        
+
         this.distortion.instance = new Tone.Distortion(this.distortion.default).chain(this.reverb.instance)
-        this.gain.instance = new Tone.Gain(this.gain.default).chain(this.distortion.instance);
+        this.gain.instance = new Tone.Gain(this.gain.default).toDestination();
     },
 
     initializePosition: function () {
-        this.position = new Tone.DuoSynth(instruments.duoSynth1).chain(this.gain.instance);
+        this.position.instance = new Tone.DuoSynth(instruments.duoSynth1).chain(this.gain.instance);
+        const minFreq = 55.000;
+        this.position.instance.triggerAttack(minFreq);
+        this.position.started = true;
     },
 
     initializeSequencer: function () {
         // Step va de 0 à 7 et indique l'étape de la matrice en cours (la verticale)
         this.sequencer.step = 0;
-        this.sequencer.instruments = [
-            {
-                instrument: new Tone.Player("../assets/sounds/kick1.wav").chain(this.gain.instance), // kick
-                type: 'player',
-                start: function (time) { this.instrument.start(time) },
 
-            },
-            {
-                instrument: new Tone.Player("../assets/sounds/bell3.wav").chain(this.gain.instance),
-                type: 'player',
-                start: function (time) { this.instrument.start(time) }
-            },
-            {
-                instrument: new Tone.FMSynth(instruments.FMSynth2).chain(this.gain.instance),
-                type: 'synth',
-                'note': 'F2',
-                start: function (time) { this.instrument.triggerAttack(this.note, time, 0.5) }
-            },
-            {
-                instrument: new Tone.Player("../assets/sounds/hihat.wav").chain(this.gain.instance),
-                type: 'player',
-                start: function (time) { this.instrument.start(time) }
-            }
+        const instrument = function (type, instrument_instance, output, note = "D3") {
+            this.volume = new Tone.Volume(0).chain(output);
+            this.type = type;
+            this.note = note;
+            this.instrument = instrument_instance.chain(this.volume);
+            this.start = function (time) {
+                if (this.type == "player") {
+                    this.instrument.start(time)
+                } else if (this.type == "synth") {
+                    this.instrument.triggerAttack(this.note, time, 0.5)
+                }
+                return this
+            };
+        };
+
+        this.sequencer.instruments = [
+            new instrument("player", new Tone.Player("../assets/sounds/kick1.wav"), this.distortion.instance),
+            new instrument("player", new Tone.Player("../assets/sounds/bell3.wav"), this.distortion.instance),
+            new instrument("synth", new Tone.FMSynth(instruments.FMSynth2), this.distortion.instance, note = "F2"),
+            new instrument("player", new Tone.Player("../assets/sounds/hihat.wav"), this.distortion.instance)
         ];
 
         Tone.loaded().then(() => {
@@ -160,12 +163,11 @@ let zombitronica = {
 
         this.socket.on('position', (data) => {
             this.gain.instance.gain.rampTo(data.y, 0.1);
-            const range = ['A1', 'C2', 'D2', 'E2', 'G2', 'A2', 'C3', 'D3', 'E3', 'G3', 'A4']
-            let newpitch = range[parseInt(data.x * 10)]
-            if (this.positionpitch != newpitch) {
-                this.position.triggerAttack(newpitch);
-                this.positionpitch = newpitch;
+            const freq = {
+                min: 55.000,
+                max: 440.000
             }
+            this.position.instance.setNote(data.x * (freq.max - freq.min) + freq.min);
         });
 
         this.socket.on('dial1', (data) => { // all data incomming must be clamped between 0 and 1
@@ -185,7 +187,9 @@ let zombitronica = {
         });
 
         this.socket.on('slider', (data) => {
-            console.log(data)
+            for(let i = 0; i < data.length; i+=1){ 
+                this.sequencer.instruments[i].instrument.volume.value = data[i]*(this.volume.max - this.volume.min) +  this.volume.min;
+            }
         });
     }
 }
