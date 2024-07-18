@@ -14,7 +14,7 @@ document.addEventListener("click", (event) => {
 }, {once: true});
 
 let sequencer = new Nexus.Sequencer('#sequencer', {
-    'size': [600, 300],
+    'size': [520, 290],
     'mode': 'toggle',
     'rows': 4,
     'columns': bars,

@@ -186,10 +186,27 @@ let zombitronica = {
 
         });
 
-        this.socket.on('slider', (data) => {
-            for(let i = 0; i < data.length; i+=1){ 
-                this.sequencer.instruments[i].instrument.volume.value = data[i]*(this.volume.max - this.volume.min) +  this.volume.min;
-            }
+        // this.socket.on('slider', (data) => {
+        //     for(let i = 0; i < data.length; i+=1){ 
+        //         this.sequencer.instruments[i].instrument.volume.value = data[i]*(this.volume.max - this.volume.min) +  this.volume.min;
+        //     }
+        // });
+
+        this.socket.on('slider0', (data) => {
+            this.sequencer.instruments[0].instrument.volume.value = data*(this.volume.max - this.volume.min) +  this.volume.min;
+            console.log(this.sequencer.instruments[0].instrument.volume.value)
+        });
+        this.socket.on('slider1', (data) => {
+            this.sequencer.instruments[1].instrument.volume.value = data*(this.volume.max - this.volume.min) +  this.volume.min;
+            console.log(this.sequencer.instruments[1].instrument.volume.value)
+        });
+        this.socket.on('slider2', (data) => {
+            this.sequencer.instruments[2].instrument.volume.value = data*(this.volume.max - this.volume.min) +  this.volume.min;
+            console.log(this.sequencer.instruments[2].instrument.volume.value)
+        });
+        this.socket.on('slider3', (data) => {
+            this.sequencer.instruments[3].instrument.volume.value = data*(this.volume.max - this.volume.min) +  this.volume.min;
+            console.log(this.sequencer.instruments[3].instrument.volume.value)
         });
     }
 }

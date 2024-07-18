@@ -24,11 +24,31 @@ body {
     padding-left: 0px;
 }
 
-
 .zombitronica__controller div{
     margin: 0 20px;
 }
 
+
+.zombitronica__sequencer {
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 10px;
+    padding-left: 75px;
+}
+#sequencer{
+    border-radius: 60px;
+    overflow: hidden;
+}
+
+.zombitronica__slider {
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 20px;
+}
+
+.zombitronica__slider div{
+    margin: 0 10px;
+}
 /* ZOMBITRONPOLIS */
 body.zombitronpolis {
     background: white;

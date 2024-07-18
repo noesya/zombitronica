@@ -1,6 +1,6 @@
 const colors = {
     accent: "#f25138",
-    fill: "#000"
+    fill: "#999"
 }
 document.addEventListener("click", (event) => {
     document.querySelector('body').requestFullscreen();
@@ -8,22 +8,29 @@ document.addEventListener("click", (event) => {
         window.location.reload();
         document.querySelector('body').requestFullscreen();
     });
-}, {once: true});
-var multislider = new Nexus.Multislider('#content', {
-    'size': [600, 300],
-    'numberOfSliders': 4,
+}, { once: true });
+
+var parameters = {
+    'size': [130, 280],
+    'mode': 'absolute',  // 'relative' or 'absolute'
     'min': 0,
     'max': 1,
-    'step': 0.1,
-    'candycane': 3,
-    'values': [0.1, 0.5, 0.6, 0.4],
-    'smoothing': 0,
-    'mode': 'bar'  // 'bar' or 'line'
-})
-multislider.colorize("accent", colors.accent);
-multislider.colorize("fill", colors.fill);
-const socket = io();
+    'step': 0,
+    'value': 0
+};
 
-multislider.on('change', function (v) {
-    socket.emit('slider', v)
-})
+var multislider = [
+    new Nexus.Slider('#content1', parameters),
+    new Nexus.Slider('#content2', parameters),
+    new Nexus.Slider('#content3', parameters),
+    new Nexus.Slider('#content4', parameters)
+];
+
+const socket = io();
+for (let i = 0; i < multislider.length; i += 1) {
+    multislider[i].colorize("accent", colors.accent);
+    multislider[i].colorize("fill", colors.fill);
+    multislider[i].on('change', function (v) {
+        socket.emit('slider' + i, v)
+    });
+}

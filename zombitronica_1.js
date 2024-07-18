@@ -22,8 +22,17 @@ zombitronica.app.get('/controller', function (req, res) {
 });
 
 zombitronica.socketServer.on('connection', (socket) => {
-  socket.on('slider', (v) => {
-    zombitronica.socketServer.emit('slider', v);
+  socket.on('slider0', (v) => {
+    zombitronica.socketServer.emit('slider0', v);
+  });
+  socket.on('slider1', (v) => {
+    zombitronica.socketServer.emit('slider1', v);
+  });
+  socket.on('slider2', (v) => {
+    zombitronica.socketServer.emit('slider2', v);
+  });
+  socket.on('slider3', (v) => {
+    zombitronica.socketServer.emit('slider3', v);
   });
 
   socket.on('position', (v) => {
