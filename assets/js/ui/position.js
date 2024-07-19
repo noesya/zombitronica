@@ -13,7 +13,7 @@ document.addEventListener("click", (event) => {
 
 
 let position = new Nexus.Position('#content', {
-    'size': [300, 300],
+    'size': [220, 220],
     'mode': 'absolute',  // "absolute" or "relative"
     'x': 0.5,  // initial x value
     'minX': 0,

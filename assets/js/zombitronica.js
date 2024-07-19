@@ -186,12 +186,6 @@ let zombitronica = {
 
         });
 
-        // this.socket.on('slider', (data) => {
-        //     for(let i = 0; i < data.length; i+=1){ 
-        //         this.sequencer.instruments[i].instrument.volume.value = data[i]*(this.volume.max - this.volume.min) +  this.volume.min;
-        //     }
-        // });
-
         this.socket.on('slider0', (data) => {
             this.sequencer.instruments[0].instrument.volume.value = data*(this.volume.max - this.volume.min) +  this.volume.min;
             console.log(this.sequencer.instruments[0].instrument.volume.value)

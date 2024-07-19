@@ -49,6 +49,13 @@ body {
 .zombitronica__slider div{
     margin: 0 10px;
 }
+
+.zombitronica__position div{
+    border-radius: 60px;
+    overflow: hidden;
+}
+
+
 /* ZOMBITRONPOLIS */
 body.zombitronpolis {
     background: white;
