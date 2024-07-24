@@ -16,7 +16,7 @@ document.addEventListener("click", (event) => {
 let sequencer = new Nexus.Sequencer('#sequencer', {
     'size': [520, 290],
     'mode': 'toggle',
-    'rows': 4,
+    'rows': 6,
     'columns': bars,
     'paddingRow': 0,
     'paddingColumn': 0
@@ -28,6 +28,8 @@ sequencer.matrix.set.all([
     [1, 0, 1, 0, 1, 0, 1, 0],
     [0, 0, 0, 1, 0, 1, 0, 0],
     [0, 0, 1, 0, 0, 1, 0, 1],
+    [0, 1, 0, 1, 1, 0, 1, 0],
+    [0, 1, 0, 1, 1, 0, 1, 0],
     [0, 1, 0, 1, 1, 0, 1, 0]
 ])
 
