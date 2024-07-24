@@ -48,6 +48,8 @@ let zombitronica = {
             [1, 0, 1, 0, 1, 0, 1, 0],
             [0, 0, 0, 1, 0, 1, 0, 0],
             [0, 0, 1, 0, 0, 1, 0, 1],
+            [0, 1, 0, 1, 1, 0, 1, 0],
+            [0, 1, 0, 1, 1, 0, 1, 0],
             [0, 1, 0, 1, 1, 0, 1, 0]
         ]
     },
@@ -127,10 +129,11 @@ let zombitronica = {
         };
 
         this.sequencer.instruments = [
-            new instrument("player", new Tone.Player("../assets/sounds/kick1.wav"), this.distortion.instance),
-            new instrument("player", new Tone.Player("../assets/sounds/bell3.wav"), this.distortion.instance),
-            new instrument("synth", new Tone.FMSynth(instruments.FMSynth2), this.distortion.instance, note = "F2"),
-            new instrument("player", new Tone.Player("../assets/sounds/hihat.wav"), this.distortion.instance)
+            new instrument("perc2", new Tone.Player("../assets/sounds/808/808-Clave3.wav"), this.distortion.instance),
+            new instrument("perc1", new Tone.Player("../assets/sounds/808/808-Cowbell.wav"), this.distortion.instance),
+            new instrument("hihat", new Tone.FMSynth("../assets/sounds/808/808-Hihats14.wav"), this.distortion.instance),
+            new instrument("snare", new Tone.Player("../assets/sounds/808/808-Snare30.wav"), this.distortion.instance),
+            new instrument("kick", new Tone.Player("../assets/sounds/808/808-Kicks26.wav"), this.distortion.instance)
         ];
 
         Tone.loaded().then(() => {
