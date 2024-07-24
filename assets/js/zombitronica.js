@@ -131,13 +131,13 @@ let zombitronica = {
         this.sequencer.instruments = [
             new instrument("perc2", new Tone.Player("../assets/sounds/808/808-Clave3.wav"), this.distortion.instance),
             new instrument("perc1", new Tone.Player("../assets/sounds/808/808-Cowbell.wav"), this.distortion.instance),
-            new instrument("hihat", new Tone.FMSynth("../assets/sounds/808/808-Hihats14.wav"), this.distortion.instance),
+            new instrument("hihat", new Tone.Player("../assets/sounds/808/808-Hihats14.wav"), this.distortion.instance),
             new instrument("snare", new Tone.Player("../assets/sounds/808/808-Snare30.wav"), this.distortion.instance),
             new instrument("kick", new Tone.Player("../assets/sounds/808/808-Kicks26.wav"), this.distortion.instance)
         ];
 
         Tone.loaded().then(() => {
-            console.log("tone loaded")
+            console.log("tone loaded");
             // Le loop est le moteur du séquenceur
             this.sequencer.loop = new Tone.Loop((time) => {
                 this.sequencer.playSounds(time);
