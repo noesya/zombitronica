@@ -28,9 +28,16 @@ let position = new Nexus.Position('#content', {
 position.colorize("accent", colors.accent);
 position.colorize("fill", colors.fill);
 const socket = io();
-
+let lastValue = 0;
 position.on('change', function (v) {
-    socket.emit('position', v)
+    v = {
+        x: Math.floor(v.x*100)/100,
+        y: Math.floor(v.y*100)/100
+    }
+    if(v != lastValue ){
+        socket.emit('position', v)
+        lastValue = v;
+    }
 })
 
 window.addEventListener("devicemotion", (event) => {
