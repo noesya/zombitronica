@@ -1,6 +1,6 @@
 const colors = {
     accent: "#f25138",
-    fill: "#000"
+    fill: "#555"
 }
 
 document.addEventListener("click", (event) => {
