@@ -118,10 +118,10 @@ export let musicPlayer = {
         };
 
         this.sequencer.instruments = [
-            new instrument("player", new Tone.Player("../assets/sounds/bell3.wav"), this.distortion.instance),
-            new instrument("player", new Tone.Player("../assets/sounds/808/808-Hihats14.wav"), this.distortion.instance),
-            new instrument("player", new Tone.Player("../assets/sounds/808/808-Snare30.wav"), this.distortion.instance),
-            new instrument("player", new Tone.Player("../assets/sounds/kick1.wav"), this.distortion.instance)
+            new instrument("player", new Tone.Player("../assets/sounds/75841__rossf__lm1-hat-open.wav"), this.distortion.instance),
+            new instrument("player", new Tone.Player("../assets/sounds/422304__akustika__hcr-01.wav"), this.distortion.instance),
+            new instrument("player", new Tone.Player("../assets/sounds/422461__akustika__sdr-105.wav"), this.distortion.instance),
+            new instrument("player", new Tone.Player("../assets/sounds/422286__akustika__bdr-05.wav"), this.distortion.instance)
         ];
 
         Tone.loaded().then(() => {
