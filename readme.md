@@ -1,35 +1,39 @@
-# Zombitron
+# Zombitronica
+Zombitronica est un instrument de musique composé à partir de téléphones qui ne sont plus utilisés. 
+C'est le premier prototype issu du projet [Zombitron](http://zombitron.org)
 
-Zombitronica a plusieurs interfaces. 
 
-La première est composée d'un séquenceur et de différents controlleurs.
+![zombitronica](docs/zombitronica.jpg?raw=true "Zombitronica")
 
+Zombitronica est composée de 4 smartphones:
+3 Android et 1 Iphone, et dont l'écran tactile fonctionne. 
+Au moins un des téléphones doit avoir une sortie jack.
+
+Sur chacun des téléphones est chargé une page web qui affiche des interfaces de controle et qui joue du son. 
 
 ##  Detail des instruments
-
-### le sequenceur > `http://[ZOMBITRON_SERVEUR_IP]/sequencer`
-4 instruments peuvent etre joués en sequence sur 8 temps
-il faut appuyer sur play pour le demarrer, et à nouveau sur play pour le mettre en pause
+### le sequenceur > `http://[ZOMBITRON_SERVEUR_IP]/`
+L'interface sequencer joue la musique et affiche un tableau de 4 lignes correspondant à 4 instruments, et 8 colonnes correspondant aux 8 temps de la boucle.
 ![sequencer](docs/sequencer.png?raw=true "Sequenceur")
 
-### le controlleur >  `http://[ZOMBITRON_SERVEUR_IP]/controller`
-Le controlleur affiche trois jauges permettant de controller le son issu du sequenceur
-( de gauche a droite): 
+### le master >  `http://[ZOMBITRON_SERVEUR_IP]/master`
+Le master affiche 4 jauges permettant de contrôler le volume issu de chaque instrument du sequenceur
+![Master](docs/master.png?raw=true "Master")
+
+### les effets > `http://[ZOMBITRON_SERVEUR_IP]/effects`
+3 jauges qui permettent d'ajouter des effets au son. 
+![Effects](docs/effects.png?raw=true "Effects")
+(de gauche a droite): 
 - le nombre de BPM du sequenceur
 - distortion
 - reverbe
-![Controlleur](docs/control.png?raw=true "Controlleur")
 
-### les effets > `http://[ZOMBITRON_SERVEUR_IP]/slider`
-4 sliders permettent de modifier une composante des instruments du sequenceur 
-Il faut jouer avec.
-![Sliders](docs/slide.png?raw=true "Sliders")
+### le Monotron > `http://[ZOMBITRON_SERVEUR_IP]/monotron`
+Le monotron affiche un slider à deux axes, et permet de jouer une nappe sonore. 
+Une dimension correspond au volume et l'autre dimension à la hauteur de note. 
+![Monotron](docs/monotron.png?raw=true "Monotron")
 
-### le traquePad > `http://[ZOMBITRON_SERVEUR_IP]/position`
-et le traquepad qui ajoute une delicatesse au tout avec sa jolie gamme pentatonique
-![Traquepad](docs/traque.png?raw=true "Traquepad")
-
-## Setup serveur
+## Parametrer le serveur
 1. Choisir un vieil Android pour le transformer en serveur-zombitron.
 2. Installer [Termux](https://play.google.com/store/apps/details?id=com.termux) sur l'appareil
 3. Lancer Termux et installer node, git et yarn
@@ -38,7 +42,7 @@ et le traquepad qui ajoute une delicatesse au tout avec sa jolie gamme pentatoni
   ```
 4. Cloner le repo
   ```
-  git clone https://github.com/noesya/zombitronpolis
+  git clone https://github.com/noesya/zombitronica
   ```
 5. Rentrer dans le dossier, installer les dépendances
   ```
@@ -47,7 +51,7 @@ et le traquepad qui ajoute une delicatesse au tout avec sa jolie gamme pentatoni
   ```
 6. Lancer le serveur
   ```
-  npm run zombitronica1
+  npm start
   ```
 
 ## Mise à jour

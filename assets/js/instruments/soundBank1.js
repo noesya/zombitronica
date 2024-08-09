@@ -1,4 +1,4 @@
-let instruments = {
+export let instruments = {
     "FMSynth1" :{
         "volume": -15,
         "detune": 1,

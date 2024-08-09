@@ -37,8 +37,9 @@ class Zombitron {
         const { Server } = require("socket.io");
         this.socketServer = new Server(this.#server);
 
-        this.app.use('/scripts', express.static(__dirname + '/node_modules'));
-        this.app.use('/assets', express.static(__dirname + '/assets'));
+        this.app.use('/scripts', express.static(__dirname + '/../node_modules'));
+        this.app.use('/assets', express.static(__dirname + '/../assets'));
+        this.app.use('/src', express.static(__dirname + '/../src'));
     }
 
     #init_server() {

@@ -1,3 +1,6 @@
+import "/scripts/tone/build/Tone.js";
+import * as instruments from "/assets/js/instruments/soundBank1.js";
+
 export let musicPlayer = {
     initialized: false,
     playing: false,
@@ -48,6 +51,8 @@ export let musicPlayer = {
         started: false
     },
     start: function () {
+        console.log(Tone)
+        Tone.start();
         if (!this.initialized) {
             this.initialize();
         }
@@ -59,13 +64,10 @@ export let musicPlayer = {
 
     stop: function () {
         Tone.getTransport().stop();
-        document.body.classList.remove("started");
         this.playing = false;
-        console.log("Zombitronica stop");
     },
 
     initialize: function () {
-        console.log("Zombitronica initializing");
         this.initializeTone();
         this.initializeFilters();
         this.initializePosition();
@@ -125,7 +127,6 @@ export let musicPlayer = {
         ];
 
         Tone.loaded().then(() => {
-            console.log("tone loaded")
             // Le loop est le moteur du séquenceur
             this.sequencer.loop = new Tone.Loop((time) => {
                 this.sequencer.playSounds(time);

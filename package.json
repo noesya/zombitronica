@@ -1,5 +1,5 @@
 {
-  "name": "zombitronweb",
+  "name": "zombitronica",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -10,7 +10,6 @@
     "tone": "^15.0.4"
   },
   "scripts": {
-    "zombitronica": "node zombitronica_1.js",
-    "start": "node zombitronica_1.js"
+    "start": "node zombitronica.js"
   }
 }
