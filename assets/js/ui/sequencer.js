@@ -1,12 +1,12 @@
 import "/src/webui/WebUI.js"
 export let sequencer = {
-    bars: 8,
+    bars: 16,
     ui: null,
     initialize: function(){
         this.ui = new Nexus.Sequencer('#sequencer', {
             'size': [520, 290],
             'mode': 'toggle',
-            'rows': 4,
+            'rows': 5,
             'columns': this.bars,
             'paddingRow': 0,
             'paddingColumn': 0
@@ -16,9 +16,10 @@ export let sequencer = {
         this.ui.matrix.set.all(this.matrix);
     },
     matrix: [
-        [0, 0, 0, 0, 0, 1, 0, 0],
-        [1, 1, 1, 1, 1, 0, 1, 1],
-        [0, 0, 1, 0, 0, 0, 1, 0],
-        [1, 0, 0, 0, 1, 0, 0, 0]        
+        [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0],
+        [1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0],
+        [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0],
+        [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0],
+        [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0]        
     ]
 }

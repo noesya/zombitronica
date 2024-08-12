@@ -130,7 +130,7 @@ export let musicPlayer = {
             // Le loop est le moteur du séquenceur
             this.sequencer.loop = new Tone.Loop((time) => {
                 this.sequencer.playSounds(time);
-                this.sequencer.step = (this.sequencer.step + 1) % 8;
+                this.sequencer.step = (this.sequencer.step + 1) % 16;
             }, "8n").start(0);
 
             // La fonction qui joue les sons selon l'état de la matrice
