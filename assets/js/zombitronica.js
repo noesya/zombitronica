@@ -26,7 +26,7 @@ var zombitronica = {
             this.musicPlayer.position.instance.setNote(data.x * (freq.max - freq.min) + freq.min);
         }.bind(this));
 
-        this.socket.on('dial1', function(data) { // all data incomming must be clamped between 0 and 1
+        this.socket.on('sliderBPM', function(data) { // all data incomming must be clamped between 0 and 1
             // interpolate 0- min bpm 1 max p
             var bpmValue = data * (this.musicPlayer.bpm.max - this.musicPlayer.bpm.min) + this.musicPlayer.bpm.min;
             Tone.getTransport().bpm.rampTo(bpmValue, 2);

@@ -1,4 +1,9 @@
 import "/src/webui/WebUI.js"
+
+var size = [130, 280];
+
+var bpm = new window.zombitron.Slider('sliderBPM', size, window.zombitron.ui);
+
 export let sequencer = {
     bars: 16,
     ui: null,
