@@ -13,3 +13,5 @@ import Slider2D from "/src/webui/Slider2D.js";
 window.zombitron.Slider2D = Slider2D;
 import Potentiometer from "/src/webui/Potentiometer.js";
 window.zombitron.Potentiometer = Potentiometer;
+import Button from "/src/webui/Button.js";
+window.zombitron.Button = Button;
