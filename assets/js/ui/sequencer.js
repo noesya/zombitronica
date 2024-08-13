@@ -5,11 +5,11 @@ var bpm = new window.zombitron.Slider('sliderBPM', size, window.zombitron.ui);
 var sizeButton = [30,30];
 
 var mute = [ 
-    new window.zombitron.Button('muteDrum', sizeButton, window.zombitron.ui),
-    new window.zombitron.Button('muteDrum', sizeButton, window.zombitron.ui),
-    new window.zombitron.Button('muteDrum', sizeButton, window.zombitron.ui),
-    new window.zombitron.Button('muteDrum', sizeButton, window.zombitron.ui),
-    new window.zombitron.Button('muteDrum', sizeButton, window.zombitron.ui)
+    new window.zombitron.Button('muteDrum1', sizeButton, window.zombitron.ui),
+    new window.zombitron.Button('muteDrum2', sizeButton, window.zombitron.ui),
+    new window.zombitron.Button('muteDrum3', sizeButton, window.zombitron.ui),
+    new window.zombitron.Button('muteDrum4', sizeButton, window.zombitron.ui),
+    new window.zombitron.Button('muteDrum5', sizeButton, window.zombitron.ui)
 ];
 
 export let sequencer = {
@@ -29,10 +29,10 @@ export let sequencer = {
         this.ui.matrix.set.all(this.matrix);
     },
     matrix: [
-        [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0],
-        [1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0],
-        [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0],
-        [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0],
-        [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0]        
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+        [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0],
+        [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0]        
     ]
 }

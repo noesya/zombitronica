@@ -53,6 +53,22 @@ var zombitronica = {
         this.socket.on('slider4', function(data) {
             this.musicPlayer.sequencer.instruments[3].instrument.volume.value = data * (this.musicPlayer.volume.max - this.musicPlayer.volume.min) + this.musicPlayer.volume.min;
         }.bind(this));
+
+        this.socket.on('muteDrum1', function (data) {
+            this.musicPlayer.sequencer.instruments[0].instrument.volume.value = data * (this.musicPlayer.volume.max - this.musicPlayer.volume.min) + this.musicPlayer.volume.min;
+        }.bind(this));
+        this.socket.on('muteDrum2', function (data) {
+            this.musicPlayer.sequencer.instruments[1].instrument.volume.value = data * (this.musicPlayer.volume.max - this.musicPlayer.volume.min) + this.musicPlayer.volume.min;
+        }.bind(this));
+        this.socket.on('muteDrum3', function (data) {
+            this.musicPlayer.sequencer.instruments[2].instrument.volume.value = data * (this.musicPlayer.volume.max - this.musicPlayer.volume.min) + this.musicPlayer.volume.min;
+        }.bind(this));
+        this.socket.on('muteDrum4', function (data) {
+            this.musicPlayer.sequencer.instruments[3].instrument.volume.value = data * (this.musicPlayer.volume.max - this.musicPlayer.volume.min) + this.musicPlayer.volume.min;
+        }.bind(this));
+        this.socket.on('muteDrum5', function (data) {
+            this.musicPlayer.sequencer.instruments[4].instrument.volume.value = data * (this.musicPlayer.volume.max - this.musicPlayer.volume.min) + this.musicPlayer.volume.min;
+        }.bind(this));
     }
 }
 

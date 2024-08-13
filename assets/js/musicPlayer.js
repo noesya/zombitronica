@@ -6,8 +6,8 @@ export let musicPlayer = {
     playing: false,
     bpm: {
         min: 80,
-        max: 200,
-        default: 100
+        max: 400,
+        default: 120
     },
     gain: {
         min: 0,
@@ -120,10 +120,12 @@ export let musicPlayer = {
         };
 
         this.sequencer.instruments = [
+            new instrument("player", new Tone.Player("../assets/sounds/13249__ianhall__rack-tom.wav"), this.distortion.instance),
             new instrument("player", new Tone.Player("../assets/sounds/75841__rossf__lm1-hat-open.wav"), this.distortion.instance),
             new instrument("player", new Tone.Player("../assets/sounds/422304__akustika__hcr-01.wav"), this.distortion.instance),
             new instrument("player", new Tone.Player("../assets/sounds/422461__akustika__sdr-105.wav"), this.distortion.instance),
-            new instrument("player", new Tone.Player("../assets/sounds/422286__akustika__bdr-05.wav"), this.distortion.instance)
+            new instrument("player", new Tone.Player("../assets/sounds/422286__akustika__bdr-05.wav"), this.distortion.instance),
+            
         ];
 
         Tone.loaded().then(() => {
